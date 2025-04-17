@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../styles/SalesReps.css';
 
 const SalesRepsList = () => {
   const [salesReps, setSalesReps] = useState([]);
