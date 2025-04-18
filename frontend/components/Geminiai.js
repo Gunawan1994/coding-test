@@ -33,7 +33,7 @@ const Geminiai = () => {
       setQuestion('');
     } catch (err) {
       console.error(err);
-      setError('Gagal mendapatkan respons AI.');
+      setError('Error to get response from gemini.');
     } finally {
       setLoading(false);
     }
@@ -41,11 +41,11 @@ const Geminiai = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Tanya Geminiai AI</h2>
+      <h2 className={styles.heading}>Question AI</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
-          placeholder="Tulis pertanyaan Anda..."
+          placeholder="Ask anything"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           className={styles.input}
@@ -53,7 +53,7 @@ const Geminiai = () => {
           required
         />
         <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? 'Memproses...' : 'Kirim'}
+          {loading ? 'Loading...' : 'Send'}
         </button>
       </form>
 
