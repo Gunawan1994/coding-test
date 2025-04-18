@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/SalesReps.css';
+import styles from '../styles/SalesReps.module.css';
 
 const SalesRepsList = () => {
   const [salesReps, setSalesReps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchSalesReps = async () => {
@@ -15,13 +16,16 @@ const SalesRepsList = () => {
         const { salesReps } = await res.json();
         setSalesReps(salesReps);
       } catch (err) {
-        setError('Filed to get data from server..');
+        setError('Gagal memuat data dari server.');
       } finally {
         setLoading(false);
       }
     };
     fetchSalesReps();
-  });
+  }, [API_URL]);
+
+  if (loading) return <div className={styles.loadingScreen}>Memuat data…</div>;
+  if (error) return <div className={styles.errorScreen}>{error}</div>;
 
   return (
     <div className={styles.container}>
@@ -65,10 +69,7 @@ const SalesRepsList = () => {
       </table>
     </div>
   );
-}
-
-if (loading) return <div className={styles.loadingScreen}>Loading…</div>;
-if (error) return <div className={styles.errorScreen}>{error}</div>;
+};
 
 export default SalesRepsList;
 

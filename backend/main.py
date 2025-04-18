@@ -2,11 +2,12 @@
 # from fastapi.middleware.cors import CORSMiddleware
 # import uvicorn
 # import json
+# import time
 
 # app = FastAPI()
 
 # # Load dummy data
-# with open("dummyData.json", "r") as f:
+# with open("../source/dummyData.json", "r") as f:
 #     DUMMY_DATA = json.load(f)
 
 # @app.get("/api/data")
@@ -14,6 +15,7 @@
 #     """
 #     Returns dummy data (e.g., list of users).
 #     """
+#     time.sleep(2)
 #     return DUMMY_DATA
 
 # @app.post("/api/ai")
@@ -38,7 +40,7 @@ from app.api.v1 import api_router
 
 app = FastAPI()
 
-# CORS Middleware
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -48,7 +50,7 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix="/api")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
-
